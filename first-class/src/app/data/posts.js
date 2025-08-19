@@ -10,16 +10,24 @@ export function getPosts() {
 
 export function getPost(id) {
   //id가 일치하는 post 가져오기
+  return posts.find((p) => p.id === Number(id));
 }
 
 export function addPost(title, content) {
   //삽입
+  const newPost = {
+    id: posts.length ? posts[posts.length - 1].id + 1 : 1,
+    title: title,
+    content: content,
+  };
+  posts.push(newPost);
 }
 
 export function updatePost(id, title, content) {
   const idx = posts.findIndex((p) => p.id === Number(id));
   if (idx === -1) return null;
   //update
+  posts[idx] = { ...posts[idx].id, title, content };
   return posts[idx];
 }
 
@@ -27,5 +35,6 @@ export function deletePost(id) {
   const idx = posts.findIndex((p) => p.id === Number(id));
   if (idx === -1) return false;
   //slice로 삭제처리
+  posts.slice(idx, 1);
   return true;
 }

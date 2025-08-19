@@ -8,6 +8,7 @@ export default function ListPage() {
 
   const fetchPosts = () => {
     //fetch('/api/posts') 작성
+    fetch('/api/data')
     //posts변경 
   };
 
@@ -29,7 +30,7 @@ export default function ListPage() {
             <Link href={`/post/${post.id}`}>{post.title}</Link>
             <div>{post.content}</div>
             <button className="button" onClick={() => }>삭제</button>
-            <span className = "button"><     >수정</Link></span>
+            <span className = "button"> <Link>수정</Link></span>
           </li>
         ))}
       </ul>
