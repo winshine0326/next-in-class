@@ -1,15 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
+// app/layout.js
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Link from "next/link";
 
 export const metadata = {
   title: "Create Next App",
@@ -19,7 +10,21 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
+        <nav>
+          <Link href="/" className="link">
+            홈
+          </Link>
+          <Link href="/list" className="link">
+            목록
+          </Link>
+          <Link href="/write" className="link">
+            글 작성
+          </Link>
+          <Link href="/about" className="link">
+            About
+          </Link>
+        </nav>
         {children}
       </body>
     </html>
