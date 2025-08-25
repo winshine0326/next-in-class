@@ -27,7 +27,7 @@ export function updatePost(id, title, content) {
   const idx = posts.findIndex((p) => p.id === Number(id));
   if (idx === -1) return null;
   //update
-  posts[idx] = { ...posts[idx].id, title, content };
+  posts[idx] = { ...posts[idx], title, content };
   return posts[idx];
 }
 
@@ -35,6 +35,6 @@ export function deletePost(id) {
   const idx = posts.findIndex((p) => p.id === Number(id));
   if (idx === -1) return false;
   //slice로 삭제처리
-  posts.slice(idx, 1);
+  posts.splice(idx, 1);
   return true;
 }

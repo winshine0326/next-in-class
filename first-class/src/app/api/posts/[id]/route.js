@@ -8,6 +8,10 @@ export async function GET(request, { params }) {
     });
   }
   //작성
+  return new Response(JSON.stringify(post), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 export async function PUT(request, { params }) {
@@ -19,6 +23,10 @@ export async function PUT(request, { params }) {
     });
   }
   //작성
+  return new Response(JSON.stringify(updated), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 export async function DELETE(request, { params }) {
@@ -29,4 +37,8 @@ export async function DELETE(request, { params }) {
     });
   }
   //작성
+  return new Response(JSON.stringify({ success: true }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }

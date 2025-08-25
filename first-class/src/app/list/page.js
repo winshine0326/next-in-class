@@ -8,7 +8,7 @@ export default function ListPage() {
 
   const fetchPosts = async () => {
     //fetch('/api/posts') 작성
-    await fetch("/api/posts")
+    await fetch("/api/posts", { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
