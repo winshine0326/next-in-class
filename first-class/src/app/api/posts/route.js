@@ -11,4 +11,6 @@ export async function GET() {
 export async function POST(request) {
   const { title, content } = await request.json();
   //작성
+  addPost(title, content);
+  return NextResponse.json({ title: title, content: content });
 }
