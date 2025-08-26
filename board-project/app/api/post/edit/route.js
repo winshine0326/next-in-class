@@ -11,6 +11,8 @@ export async function POST(request) {
     let client = await connectDB;
     const db = client.db("board");
 
+    const body = Object.fromEntries(formData.entries());
+
     // 기본 검증(body._id, body.title)
     if (!body._id) {
       return NextResponse.json("id가 필요합니다");
@@ -24,5 +26,7 @@ export async function POST(request) {
     );
   } catch (error) {
     //에러 처리
+  } finally {
+    return NextResponse.redirect(new URL("/list", request.url), 302);
   }
 }
