@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/rsc/Desktop/넥스트장인/board-project/app/**)",
+      "Read(//Users/rsc/Desktop/넥스트장인/board-project/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
