@@ -1,32 +1,39 @@
-import { connectDB } from "@/app/util/database";
+/* app/api/post/edit/route.js */
+import { connectDB } from "../../../util/database.js";
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 
-// App Router 방식에 맞게 POST 메서드로 작성
 export async function POST(request) {
   try {
-    // 폼 데이터 파싱
+
     const formData = await request.formData();
-
-    let client = await connectDB;
-    const db = client.db("board");
-
     const body = Object.fromEntries(formData.entries());
 
-    // 기본 검증(body._id, body.title)
     if (!body._id) {
-      return NextResponse.json("id가 필요합니다");
+      return NextResponse.json("게시글 ID가 없습니다!", { status: 500 });
     }
 
-    // DB 업데이트
+    if (!body.title || body.title.trim() === "") {
+      return NextResponse.json("제목을 입력해주세요!", { status: 500 });
+    }
+
+    const client = await connectDB;
+    const db = client.db("board");
+
     await db.collection("post").updateOne(
       { _id: new ObjectId(body._id) },
-      // body.content ?? "": 폼에서 content 값이 없으면 빈 문자열로 대체
-      { $set: { title: body.title, content: body.content ?? "" } }
+      {
+        $set: {
+          title: body.title,
+          content: body.content ?? "",
+          updatedAt: new Date()
+        }
+      }
     );
+
+    return NextResponse.redirect(new URL(`/detail/${body._id}`, request.url), 302);
   } catch (error) {
-    //에러 처리
-  } finally {
-    return NextResponse.redirect(new URL("/list", request.url), 302);
+    console.error(error);
+    return NextResponse.json("서버 오류", { status: 500 });
   }
 }

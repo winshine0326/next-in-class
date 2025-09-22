@@ -1,10 +1,11 @@
 /* app/api/test/route.js */
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 export async function GET(request) {
-  console.log("GET /api/test");
+
+  console.log('GET /api/test');
   // { message: 'OK' } 형태로 JSON 응답 반환
-  return NextResponse.json({ message: "성공함" });
+  return NextResponse.json({ message: '성공함' });
 }
 
 export async function POST(request) {

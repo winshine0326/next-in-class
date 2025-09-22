@@ -1,6 +1,8 @@
 /* app/api/auth/[...nextauth]/route.js */
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import { connectDB } from "@/app/util/database";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 //주요기능
 //깃헙 로그인기능 만들기 (OAuth 로그인)
 
@@ -13,6 +15,7 @@ export const authOptions = {
     }),
   ],
   secret: "jwt생성시쓰는암호", //1-3
+  adapter: MongoDBAdapter(connectDB),
 };
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
